@@ -20,7 +20,7 @@ jobs:
       - name: Build FSBL
         run: |
           cd lib/sw_apps/zynq_fsbl/src
-          arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -o fsbl.elf *.c -I../include -L../lib -lxil
+          arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -o fsbl.elf *.c -I../include -L../lib -lxil -lxilffs
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
