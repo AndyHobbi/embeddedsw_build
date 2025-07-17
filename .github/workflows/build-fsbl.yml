@@ -1,0 +1,39 @@
+name: Build Zynq FSBL
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'lib/sw_apps/zynq_fsbl/**'
+
+jobs:
+  build-fsbl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout embeddedsw
+        uses: actions/checkout@v4
+
+      - name: Install prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libncurses5 libncurses5-dev
+
+      # !!! ЭТАП установки Vivado/Vitis или SDK - тут нужен либо docker image, либо ручная установка !!!
+      # Можно использовать open-source toolchain (aarch32-none-elf-gcc), если не требуется спец. IP
+      # Ниже пример через ARM toolchain:
+      - name: Install ARM toolchain
+        run: |
+          sudo apt-get install -y gcc-arm-linux-gnueabi
+
+      - name: Build FSBL (example, edit for real build)
+        run: |
+          cd lib/sw_apps/zynq_fsbl/src
+          # Пример ручной сборки — нужный Makefile может отсутствовать, возможно понадобится доработать:
+          arm-linux-gnueabi-gcc -o fsbl.elf *.c -I../../../lib/sw_apps/zynq_fsbl/include
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fsbl-elf
+          path: lib/sw_apps/zynq_fsbl/src/fsbl.elf
