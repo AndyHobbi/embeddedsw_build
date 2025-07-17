@@ -23,7 +23,7 @@ jobs:
         run: |
           cd lib/sw_apps/zynq_fsbl/src
           # Пример сборки! Возможно, нужен Makefile или другой путь.
-          arm-linux-gnueabi-gcc -o fsbl.elf *.c -I../../../lib/sw_apps/zynq_fsbl/include -I../../../lib/sw_apps/zynq_fsbl/bsp/include
+          arm-linux-gnueabi-gcc -o fsbl.elf *.c -I../../../lib/sw_apps/zynq_fsbl/include -I../../../lib/sw_apps/zynq_fsbl/include
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
