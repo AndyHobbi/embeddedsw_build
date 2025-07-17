@@ -6,8 +6,6 @@
 
 /* Minimal syscall stubs for newlib (bare-metal, Xilinx FSBL) */
 
-void *__dso_handle;
-
 int _close(int file) { return -1; }
 int _fstat(int file, struct stat *st) { st->st_mode = S_IFCHR; return 0; }
 int _isatty(int file) { return 1; }
