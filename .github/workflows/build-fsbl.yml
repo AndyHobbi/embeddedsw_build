@@ -1,7 +1,13 @@
+name: Build Zynq FSBL
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+
 jobs:
   build-fsbl:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout embeddedsw
         uses: actions/checkout@v4
@@ -15,3 +21,28 @@ jobs:
         run: |
           cd lib/sw_apps/zynq_fsbl/src
           arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -o fsbl.elf *.c -I../include
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fsbl-elf
+          path: lib/sw_apps/zynq_fsbl/src/fsbl.elf
+Что делать дальше:
+Добавь блок on: в начало файла.
+
+Сохрани и закоммить изменения.
+
+Workflow снова будет запускаться по пушу и вручную.
+
+Если ещё что-то не ясно — пришли весь YAML, и я точно подскажу, куда вставить!
+
+
+
+
+
+
+
+
+
+Спросить ChatGPT
+
