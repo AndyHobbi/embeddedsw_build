@@ -25,5 +25,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: fsbl-bin
-          path: lib/sw_apps/zynq_fsbl/src/fsbl.bin
+          name: fsbl-elf
+          path: lib/sw_apps/zynq_fsbl/src/fsbl.elf
